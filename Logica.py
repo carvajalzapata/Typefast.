@@ -20,3 +20,6 @@ class Partida:
 
     def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float)
         pass
+
+    def asignar_puntaje(self, precision: float, velocidad: float):
+        pass
