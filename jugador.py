@@ -63,3 +63,10 @@ class Jugador:
         self.niveles_superados = 0
         self.partidas_jugadas = 0
         self.historial = []
+
+    def __str__(self):
+        return (f"Jugador: {self.nombre}\n"
+                f"Puntaje total: {self.puntaje_total}\n"
+                f"Velocidad promedio : {self.velocidad_promedio:.2f}\n"
+                f"Precisión promedio : {self.precision_promedio:.2f}\n"
+                f"Niveles superados: {self.niveles_superados}")
