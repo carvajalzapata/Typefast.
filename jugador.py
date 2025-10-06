@@ -40,3 +40,10 @@ class Jugador:
             'nivel_alcanzado': nivel_alcanzado if nivel_alcanzado is not None else None
 
         })
+
+    def actualizar_estadisticas(self):
+        pass
+
+
+    def reiniciar_datos(self):
+        pass
