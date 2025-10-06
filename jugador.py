@@ -57,4 +57,9 @@ class Jugador:
         self.niveles_superados = max(niveles) if niveles else 0
 
     def reiniciar_datos(self):
-        pass
+        self.puntaje_total = 0
+        self.velocidad_promedio = 0.0
+        self.precision_promedio = 0.0
+        self.niveles_superados = 0
+        self.partidas_jugadas = 0
+        self.historial = []
