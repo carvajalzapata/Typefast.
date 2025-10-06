@@ -17,3 +17,6 @@ class Partida:
         errores = palabra.contar_errores(palabra_usuario)
         precision = palabra.calcular_precision(palabra_usuario)
         return errores, precision
+
+    def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float)
+        pass
