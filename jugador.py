@@ -28,4 +28,15 @@ class Jugador:
             except Exception:
                 pass
 
+        n_prev = self.partidas_jugadas - 1
+        n_new = self.partidas_jugadas
+        self.velocidad_promedio = (self.velocidad_promedio * n_prev + float(velocidad)) / n_new
+        self.precision_promedio = (self.precision_promedio * n_prev + float(precision)) / n_new
 
+        self.historial.append({
+            'puntaje': puntaje,
+            'precision': precision,
+            'velocidad': velocidad,
+            'nivel_alcanzado': nivel_alcanzado if nivel_alcanzado is not None else None
+
+        })
