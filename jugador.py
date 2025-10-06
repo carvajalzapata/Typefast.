@@ -17,4 +17,15 @@ class Jugador:
         if not (isinstance(velocidad, (int, float)) and velocidad >= 0):
             raise ValueError("la velocidad deb de ser mayor que 0")
 
+        self.partidas_jugadas += 1
+        self.puntaje_total += int(puntaje)
+
+        if nivel_alcanzado is not None:
+            try:
+                nivel = int(nivel_alcanzado)
+                if nivel > self.niveles_superados:
+                    self.niveles_superados = nivel
+            except Exception:
+                pass
+
 
