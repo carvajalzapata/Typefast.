@@ -23,3 +23,9 @@ class Partida:
 
     def asignar_puntaje(self, precision: float, velocidad: float):
         pass
+
+    def avanzar_nivel(self):
+        pass
+
+    def finalizar_partida(self):
+        pass
