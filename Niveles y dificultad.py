@@ -42,20 +42,6 @@ class PalabraJuego:
 
     def __str__(self) -> str:
         return f"Palabra escrita: {self.texto}, Errores: {self.errores}, Precisión: {round(self.precision * 100, 2)}%"
-# Palabra original del juego
-palabra_juego = "python"
-
-# Palabra escrita por el jugador
-jugador = PalabraJuego("pythno")
-
-# Comparar ambas
-jugador.comparar_con(palabra_juego)
-
-# Mostrar resultados
-jugador.mostrar_resultado()
-
-# Verificar si es exactamente igual
-print("¿Es correcta?:", jugador.es_correcta(palabra_juego))
 
 
 class RepositorioPalabras:
