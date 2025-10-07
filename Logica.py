@@ -1,4 +1,5 @@
 import time
+import random
 
 class Jugador:
     def __init__(self, nombre: str):
@@ -105,11 +106,12 @@ class RepositorioPalabras:
 
 
 class Nivel:
-    def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
-        self.jugador = jugador
+    def __init__(self, numero: int, tiempo_limite: float, precision_requerida: float, repositorio):
+        self.numero = numero
+        self.tiempo_limite = tiempo_limite
+        self.precision_requerida = precision_requerida
         self.repositorio = repositorio
-        self.nivel_actual = 1
-        self.estado = "inactiva"
+        self.palabras = self.repositorio.obtener_por_nivel(numero, 5)
 
     def generar_palabra(self):
         self.palabras = self.repositorio.obtener_por_nivel(self.numero, 5)
@@ -129,6 +131,7 @@ class Nivel:
             return False
 
 
+
 class Partida:
     def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
         self.jugador = jugador
@@ -145,22 +148,22 @@ class Partida:
         inicio = time.time()
 
         for palabra in nivel.palabras:
-            print(f"\n {palabra}")
+            print(f"\n Palabra: {palabra.texto}")
             entrada = input("Tu palabra: ").strip()
-            palabra_obj = PalabraJuego(palabra)
+            palabra_obj = PalabraJuego(palabra.texto)
             precision = palabra_obj.comparar_con(entrada)
             total_precision += precision
 
-            if precision == 100:
+            if precision == 1.0:
                 correctas += 1
                 print("No esta mal!")
             else:
-                print(f"Pesimo: {palabra_obj.errores} | Precisión: {precision:.2f}%")
+                print(f"Pesimo: {palabra_obj.errores} | Precisión: {precision * 100:.2f}%")
 
         fin = time.time()
         duracion = fin - inicio
 
-        precision_media = total_precision / len(nivel.palabras)
+        precision_media = (total_precision / len(nivel.palabras)) * 100
         velocidad = (correctas / (duracion / 60))
         puntaje = (precision_media * 0.7) + (velocidad * 0.3)
 
@@ -177,9 +180,10 @@ class Partida:
         else:
             print("Dedicate a tiktoker mejor.")
             return False
+
     def iniciar(self):
         self.estado = "activa"
-        print(f"\ ¡Esto es TypeFast MadaFakar, {self.jugador.nombre}!")
+        print(f"\n ¡Esto es TypeFast MadaFakar, {self.jugador.nombre}!")
 
         while True:
             nivel = Nivel(
@@ -209,7 +213,7 @@ class Partida:
         print("----------------------------")
 
 if __name__ == "__main__":
-    print("🧠 Bienvenido a TYPEFAST — Juego de mecanografía")
+    print("Bienvenido a TYPEFAST — Juego de mecanografía 🖋️")
     nombre = input("Ingresa tu nombre: ")
     jugador = Jugador(nombre)
     repositorio = RepositorioPalabras()
