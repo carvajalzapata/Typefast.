@@ -1,6 +1,5 @@
 import time
 
-
 class Jugador:
     def __init__(self, nombre: str):
         self.nombre: str = nombre
@@ -106,14 +105,11 @@ class RepositorioPalabras:
 
 
 class Nivel:
-    def __init__(self, numero: int, tiempo_limite: float, precision_requerida: float,
-                 repositorio: 'RepositorioPalabras') -> None:
-        self.numero: int = numero
-        self.tiempo_limite: float = tiempo_limite
-        self.precision_requerida: float = precision_requerida
-        self.palabras: list = []
-        self.indice_actual: int = 0
-        self.repositorio: RepositorioPalabras = repositorio
+    def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
+        self.jugador = jugador
+        self.repositorio = repositorio
+        self.nivel_actual = 1
+        self.estado = "inactiva"
 
     def generar_palabra(self):
         self.palabras = self.repositorio.obtener_por_nivel(self.numero, 5)
@@ -137,110 +133,7 @@ class Partida:
     def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
         self.jugador = jugador
         self.repositorio = repositorio
-        self.nivel_actual = Nivel(
-            numero=1,
-            tiempo_limite=30,
-            precision_requerida=80,
-            repositorio=repositorio
-        )
-        self.historial_niveles = []
+        self.nivel_actual = 1
         self.estado = "inactiva"
-        self.tiempo_inicio = None
-
-    def iniciar_partida(self):
-        print(f"\n🎮 ¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1...")
-        self.estado = "activa"
-        self.tiempo_inicio = time.time()
-        self.nivel_actual.generar_palabra()
-
-    def verificar_palabra(self, palabra_original: str, palabra_usuario: str):
-        palabra = PalabraJuego(palabra_original)
-        errores = palabra.calcular_errores(palabra_usuario)
-        precision = palabra.comparar_con(palabra_usuario)
-        return errores, precision
-
-    def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float):
-        if tiempo_transcurrido <= 0:
-            raise ValueError("El tiempo transcurrido debe ser mayor que 0.")
-        precision = (palabras_correctas / max(1, len(self.nivel_actual.palabras))) * 100
-        velocidad = (palabras_correctas / (tiempo_transcurrido / 60))
-        return precision, velocidad
-
-    def asignar_puntaje(self, precision: float, velocidad: float):
-        puntaje = (precision * 0.7) + (velocidad * 0.3)
-        self.jugador.registrar_resultado(puntaje, precision, velocidad, self.nivel_actual.numero)
-        print(f"Puntaje obtenido en nivel {self.nivel_actual.numero}: {puntaje:.2f}")
-        return puntaje
-
-    def avanzar_nivel(self):
-        print("\n Evaluando si puedes avanzar de nivel.")
-        if self.nivel_actual.puede_pasar(self.jugador.precision_promedio):
-            self.historial_niveles.append(self.nivel_actual)
-            nuevo_numero = self.nivel_actual.numero + 1
-            nuevo_tiempo = max(10, self.nivel_actual.tiempo_limite - 5)
-            nueva_precision = min(100, self.nivel_actual.precision_requerida + 5)
-
-            # Crear el nuevo nivel y generar sus palabras
-            self.nivel_actual = Nivel(
-                numero=nuevo_numero,
-                tiempo_limite=nuevo_tiempo,
-                precision_requerida=nueva_precision,
-                repositorio=self.repositorio
-            )
-            self.nivel_actual.generar_palabra()
-            print(f"\n Avanzas al nivel {nuevo_numero} \n")
-        else:
-            print(" Muy malo perdiste.")
-
-    def finalizar_partida(self):
-        self.estado = "finalizada"
-        print("\n-PARTIDA FINALIZADA-")
-        print(self.jugador)
-        print(f"Niveles completados: {len(self.historial_niveles)}")
-        print("----------------------------")
 
 
-    def iniciar(self):
-        self.estado = "activa"
-        print(f"\n🎮 ¡Bienvenido a TypeFast, {self.jugador.nombre}!")
-
-        while True:
-            nivel = Nivel(
-                numero=self.nivel_actual,
-                tiempo_limite=max(10, 30 - (self.nivel_actual - 1) * 5),
-                precision_requerida=min(95, 80 + (self.nivel_actual - 1) * 5),
-                repositorio=self.repositorio
-            )
-
-            superado = self.jugar_nivel(nivel)
-
-            if superado:
-                self.nivel_actual += 1
-                if self.nivel_actual > 3:
-                    print("\n🏆 ¡Has completado todos los niveles!")
-                    break
-            else:
-                repetir = input("¿Deseas intentar el nivel otra vez? (s/n): ").strip().lower()
-                if repetir != 's':
-                    break
-
-        self.finalizar_partida()
-
-    def finalizar_partida(self):
-        print("\n🏁 --- PARTIDA FINALIZADA ---")
-        print(self.jugador)
-        print("----------------------------")
-
-
-# ---------------------------------------------
-# BLOQUE PRINCIPAL
-# ---------------------------------------------
-if __name__ == "__main__":
-    print("🧠 Bienvenido a TYPEFAST — Juego de mecanografía")
-    nombre = input("Ingresa tu nombre: ")
-    jugador = Jugador(nombre)
-    repositorio = RepositorioPalabras()
-    repositorio.cargar_palabras()
-
-    partida = Partida(jugador, repositorio)
-    partida.iniciar()
