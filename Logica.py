@@ -71,7 +71,7 @@ class Jugador:
                 f"Precisión promedio : {self.precision_promedio:.2f}\n"
                 f"Niveles superados: {self.niveles_superados}")
 
-    class PalabraJuego:
+class PalabraJuego:
         def __init__(self, texto: str, usada: bool = False) -> None:
             self.texto: str = texto
             self.precision: float = 0.0
@@ -214,53 +214,64 @@ class Jugador:
 
 class Partida:
 
-    def __init__(self, jugador: Jugador):
+    def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
         self.jugador = jugador
         self.repositorio = repositorio
-        self.nivel_actual = jugador.Nivel(numero=1, tiempo_limite=30, precision_requerida=80, repositorio=repositorio)
+        self.nivel_actual = Nivel(
+            numero=1,
+            tiempo_limite=30,
+            precision_requerida=80,
+            repositorio=repositorio
+        )
         self.historial_niveles = []
         self.estado = "inactiva"
         self.tiempo_inicio = None
 
     def iniciar_partida(self):
-        print(f"¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1")
+        print(f"¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1...")
         self.estado = "activa"
         self.tiempo_inicio = time.time()
-        self.nivel_actual.generar_palabra(self.repositorio)
+        self.nivel_actual.generar_palabra()
 
     def verificar_palabra(self, palabra_original: str, palabra_usuario: str):
-        palabra  = self.jugador.PalabraJuego(palabra_original)
+        palabra = PalabraJuego(palabra_original)
         errores = palabra.calcular_errores(palabra_usuario)
         precision = palabra.comparar_con(palabra_usuario)
         return errores, precision
 
-    def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float)
+    def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float):
         if tiempo_transcurrido <= 0:
             raise ValueError("El tiempo transcurrido debe ser mayor que 0.")
         precision = (palabras_correctas / max(1, self.nivel_actual.indice_actual + 1)) * 100
         velocidad = (palabras_correctas / (tiempo_transcurrido / 60))
         return precision, velocidad
 
-def asignar_puntaje(self, precision: float, velocidad: float):
-    puntaje = (precision * 0.7) + (velocidad * 0.3)
-    self.jugador.registrar_resultado(puntaje, precision, velocidad, self.nivel_actual.numero)
-    print(f"Puntaje obtenido en nivel {self.nivel_actual.numero}: {puntaje:.2f}")
-    return puntaje
+    def asignar_puntaje(self, precision: float, velocidad: float):
+        puntaje = (precision * 0.7) + (velocidad * 0.3)
+        self.jugador.registrar_resultado(puntaje, precision, velocidad, self.nivel_actual.numero)
+        print(f"Puntaje obtenido en nivel {self.nivel_actual.numero}: {puntaje:.2f}")
+        return puntaje
 
-def avanzar_nivel(self):
-    if self.nivel_actual.puede_pasar(self.jugador.precision_promedio):
-        self.historial_niveles.append(self.nivel_actual)
-        nuevo_numero = self.nivel_actual.numero + 1
-        nuevo_tiempo = max(10, self.nivel_actual.tiempo_limite - 5)
-        nueva_precision = min(100, self.nivel_actual.precision_requerida + 5)
-        self.nivel_actual = self.jugador.Nivel(numero=nuevo_numero,
-                                                   tiempo_limite=nuevo_tiempo,
-                                                   precision_requerida=nueva_precision,
-                                                   repositorio=self.repositorio
-                                               )
-        print(f"\n--- Avanzas al nivel {nuevo_numero} ---\n")
-    else:
-        print("Debes repetir el nivel actual para mejorar tu precisión.")
+    def avanzar_nivel(self):
+        if self.nivel_actual.puede_pasar(self.jugador.precision_promedio):
+            self.historial_niveles.append(self.nivel_actual)
+            nuevo_numero = self.nivel_actual.numero + 1
+            nuevo_tiempo = max(10, self.nivel_actual.tiempo_limite - 5)
+            nueva_precision = min(100, self.nivel_actual.precision_requerida + 5)
+            self.nivel_actual = Nivel(
+                numero=nuevo_numero,
+                tiempo_limite=nuevo_tiempo,
+                precision_requerida=nueva_precision,
+                repositorio=self.repositorio
+            )
+            print(f"\n--- Avanzas al nivel {nuevo_numero} ---\n")
+        else:
+            print("Debes repetir el nivel actual para mejorar tu precisión.")
 
     def finalizar_partida(self):
-        pass
+        self.estado = "finalizada"
+        print("\n--- PARTIDA FINALIZADA ---")
+        print(self.jugador)
+        print(f"Niveles completados: {len(self.historial_niveles)}")
+        print("----------------------------")
+
