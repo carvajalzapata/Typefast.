@@ -136,4 +136,47 @@ class Partida:
         self.nivel_actual = 1
         self.estado = "inactiva"
 
+    def jugar_nivel(self, nivel: Nivel):
+        print(f"\n Estas en el nivel {nivel.numero} — tienes un tiempo de: {nivel.tiempo_limite} segundos")
+        print("Copia perro!:")
+
+        correctas = 0
+        total_precision = 0
+        inicio = time.time()
+
+        for palabra in nivel.palabras:
+            print(f"\n {palabra}")
+            entrada = input("Tu palabra: ").strip()
+            palabra_obj = PalabraJuego(palabra)
+            precision = palabra_obj.comparar_con(entrada)
+            total_precision += precision
+
+            if precision == 100:
+                correctas += 1
+                print("No esta mal!")
+            else:
+                print(f"Pesimo: {palabra_obj.errores} | Precisión: {precision:.2f}%")
+
+        fin = time.time()
+        duracion = fin - inicio
+
+        precision_media = total_precision / len(nivel.palabras)
+        velocidad = (correctas / (duracion / 60))
+        puntaje = (precision_media * 0.7) + (velocidad * 0.3)
+
+        print(f"\n Resultados del nivel {nivel.numero}:")
+        print(f"Precisión promedio: {precision_media:.2f}%")
+        print(f"Velocidad: {velocidad:.2f} palabras/min")
+        print(f"Puntaje: {puntaje:.2f}")
+
+        self.jugador.registrar_resultado(puntaje, precision_media, velocidad, nivel.numero)
+
+        if nivel.puede_pasar(precision_media):
+            print("¡Tuviste suerte!")
+            return True
+        else:
+            print("Dedicate a tiktoker mejor.")
+            return False
+
+
 
