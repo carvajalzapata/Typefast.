@@ -216,12 +216,14 @@ class Partida:
 
     def __init__(self, jugador: Jugador):
         self.jugador = jugador
-        self.nivel_actual = Nivel(numero = 1)
+        self.repositorio = repositorio
+        self.nivel_actual = jugador.Nivel(numero=1, tiempo_limite=30, precision_requerida=80, repositorio=repositorio)
         self.historial_niveles = []
-        self.estado = "inactiva"self.tiempo_inicio = None
+        self.estado = "inactiva"
+        self.tiempo_inicio = None
 
     def iniciar_partida(self):
-        print(f"¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1...")
+        print(f"¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1")
         self.estado = "activa"
         self.tiempo_inicio = time.time()
         self.nivel_actual.generar_palabra(self.repositorio)
@@ -233,9 +235,12 @@ class Partida:
         return errores, precision
 
     def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float)
-        pass
+        if tiempo_transcurrido <= 0:
+            raise ValueError("El tiempo transcurrido debe ser mayor que 0.")
+        precision = (palabras_correctas / max(1, self.nivel_actual.indice_actual + 1)) * 100
+        velocidad = (palabras_correctas / (tiempo_transcurrido / 60))
 
-    def asignar_puntaje(self, precision: float, velocidad: float):
+def asignar_puntaje(self, precision: float, velocidad: float):
         pass
 
     def avanzar_nivel(self):
