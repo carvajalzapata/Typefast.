@@ -208,6 +208,16 @@ class Partida:
         print(self.jugador)
         print("----------------------------")
 
+if __name__ == "__main__":
+    print("🧠 Bienvenido a TYPEFAST — Juego de mecanografía")
+    nombre = input("Ingresa tu nombre: ")
+    jugador = Jugador(nombre)
+    repositorio = RepositorioPalabras()
+    repositorio.cargar_palabras()
+
+    partida = Partida(jugador, repositorio)
+    partida.iniciar()
+
 
 
 
