@@ -239,9 +239,13 @@ class Partida:
             raise ValueError("El tiempo transcurrido debe ser mayor que 0.")
         precision = (palabras_correctas / max(1, self.nivel_actual.indice_actual + 1)) * 100
         velocidad = (palabras_correctas / (tiempo_transcurrido / 60))
+        return precision, velocidad
 
 def asignar_puntaje(self, precision: float, velocidad: float):
-        pass
+    puntaje = (precision * 0.7) + (velocidad * 0.3)
+    self.jugador.registrar_resultado(puntaje, precision, velocidad, self.nivel_actual.numero)
+    print(f"Puntaje obtenido en nivel {self.nivel_actual.numero}: {puntaje:.2f}")
+    return puntaje
 
     def avanzar_nivel(self):
         pass
