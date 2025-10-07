@@ -88,26 +88,45 @@ class RepositorioPalabras:
 
 
 class Nivel:
-    def __init__(self, numero: int, tiempo_limite: float, precision_requerida:float) -> None:
+    def __init__(self, numero: int, tiempo_limite: float, precision_requerida:float, repositorio: 'RepositorioPalabras') -> None:
         self.numero: int = numero
         self.tiempo_limite: float = tiempo_limite
         self.precision_requerida: float = precision_requerida
         self.palabras: list = []
         self.indice_actual: int = 0
+        self.repositorio: RepositorioPalabras = repositorio
 
-    def generar_palabra(self):
-        pass
-    def obtener_palabra(self):
-        pass
+    def generar_palabra(self, repositorio):
+        self.palabras = repositorio.obtener_por_nivel(self.numero, 5)
 
+        if len(self.palabras) > 0:
+            print("Palabras cargadas para el nivel", self.numero)
+            for palabra in self.palabras:
+                print("-", palabra.texto)
+        else:
+            print("No hay palabras disponibles para este nivel.")
 
-    def puede_pasar(self, precision:float, velocidad:int):
-        pass
+    def obtener_palabra(self) -> None:
+        if self.indice_actual < len(self.palabras):
+            return self.palabras[self.indice_actual]
+        else:
+            return None
 
     def siguiente_palabra(self):
-        pass
+        if self.indice_actual < len(self.palabras) - 1:
+            self.indice_actual = self.indice_actual + 1
+        else:
+            print("Ya completaste todas las palabras de este nivel.")
 
-    def reducir_tiempo(self):
+    def puede_pasar(self, precision_jugador:float):
+        if precision_jugador >= self.precision_requerida:
+            print("¡Nivel superado!")
+            return True
+        else:
+            print("No alcanzaste la precisión requerida.")
+            return False
+
+    def reducir_tiempo(self, reduccion: int):
         pass
 
     def pasar_nivel(self):
@@ -117,7 +136,8 @@ class Nivel:
         pass
 
     def reiniciar(self):
-        pass
+        self.indice_actual = 0
+        print("Nivel reiniciado.")
 
 
     
