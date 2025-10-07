@@ -203,6 +203,11 @@ class Partida:
 
         self.finalizar_partida()
 
+    def finalizar_partida(self):
+        print("\n PARTIDA FINALIZADA ")
+        print(self.jugador)
+        print("----------------------------")
+
 
 
 
