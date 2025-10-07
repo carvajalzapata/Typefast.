@@ -5,7 +5,6 @@ class PalabraJuego:
         self.errores: int = 0
         self.usada: bool = usada
 
-
     def calcular_errores(self, entrada: str) -> int:
         error = 0
         i = 0
@@ -48,6 +47,7 @@ class PalabraJuego:
         return f"Palabra escrita: {self.texto}, Errores: {self.errores}, Precisión: {round(self.precision * 100, 2)}%"
 
 class RepositorioPalabras:
+
     def __init__(self) -> None:
         self.palabras: list = []
 
@@ -79,7 +79,6 @@ class RepositorioPalabras:
                 palabras_nivel.append(palabra)
 
         return palabras_nivel
-
 
     def __str__(self):
         print("Palabras en el repositorio")
