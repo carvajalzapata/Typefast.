@@ -224,11 +224,12 @@ class Partida:
         print(f"¡Bienvenido {self.jugador.nombre}! Comenzando el nivel 1...")
         self.estado = "activa"
         self.tiempo_inicio = time.time()
+        self.nivel_actual.generar_palabra(self.repositorio)
 
     def verificar_palabra(self, palabra_original: str, palabra_usuario: str):
-        palabra  = PalabraJuego(palabra_original)
-        errores = palabra.contar_errores(palabra_usuario)
-        precision = palabra.calcular_precision(palabra_usuario)
+        palabra  = self.jugador.PalabraJuego(palabra_original)
+        errores = palabra.calcular_errores(palabra_usuario)
+        precision = palabra.comparar_con(palabra_usuario)
         return errores, precision
 
     def calcular_precision_y_velocidad(self, palabras_correctas: int, tiempo_transcurrido: float)
