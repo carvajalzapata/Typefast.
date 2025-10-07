@@ -177,6 +177,32 @@ class Partida:
         else:
             print("Dedicate a tiktoker mejor.")
             return False
+    def iniciar(self):
+        self.estado = "activa"
+        print(f"\ ¡Esto es TypeFast MadaFakar, {self.jugador.nombre}!")
+
+        while True:
+            nivel = Nivel(
+                numero=self.nivel_actual,
+                tiempo_limite=max(10, 30 - (self.nivel_actual - 1) * 5),
+                precision_requerida=min(95, 80 + (self.nivel_actual - 1) * 5),
+                repositorio=self.repositorio
+            )
+
+            superado = self.jugar_nivel(nivel)
+
+            if superado:
+                self.nivel_actual += 1
+                if self.nivel_actual > 3:
+                    print("\n ¡pasaste!")
+                    break
+            else:
+                repetir = input("¿Deseas intentar el nivel otra vez? (s/n): ").strip().lower()
+                if repetir != 's':
+                    break
+
+        self.finalizar_partida()
+
 
 
 
