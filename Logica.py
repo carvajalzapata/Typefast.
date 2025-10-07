@@ -247,8 +247,20 @@ def asignar_puntaje(self, precision: float, velocidad: float):
     print(f"Puntaje obtenido en nivel {self.nivel_actual.numero}: {puntaje:.2f}")
     return puntaje
 
-    def avanzar_nivel(self):
-        pass
+def avanzar_nivel(self):
+    if self.nivel_actual.puede_pasar(self.jugador.precision_promedio):
+        self.historial_niveles.append(self.nivel_actual)
+        nuevo_numero = self.nivel_actual.numero + 1
+        nuevo_tiempo = max(10, self.nivel_actual.tiempo_limite - 5)
+        nueva_precision = min(100, self.nivel_actual.precision_requerida + 5)
+        self.nivel_actual = self.jugador.Nivel(numero=nuevo_numero,
+                                                   tiempo_limite=nuevo_tiempo,
+                                                   precision_requerida=nueva_precision,
+                                                   repositorio=self.repositorio
+                                               )
+        print(f"\n--- Avanzas al nivel {nuevo_numero} ---\n")
+    else:
+        print("Debes repetir el nivel actual para mejorar tu precisión.")
 
     def finalizar_partida(self):
         pass
