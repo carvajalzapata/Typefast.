@@ -114,6 +114,16 @@ class Juego:
 
         self.mostrar_resultados(partida.jugador)
 
+    def mostrar_resultados(self, jugador: Jugador):
+        print("\n=== RESULTADOS FINALES ===")
+        print(jugador)
+
+    def reiniciar_partida(self):
+        if self.partida_actual:
+            self.partida_actual = Partida(self.partida_actual.jugador, self.repositorio)
+            print("Partida reiniciada.")
+            self.partida_actual.iniciar()
+
 
 
 
