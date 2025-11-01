@@ -66,6 +66,17 @@ class Partida:
         )
         self.en_curso = False
 
+class Juego:
+    def __init__(self):
+        print("Inicializando Typefast...")
+        self.repositorio = RepositorioPalabras()
+        self.repositorio.cargar_palabras()
+        self.partidas = []
+        self.jugadores = []
+        self.partida_actual = None
+        self.activo = True
+        print("Repositorio de palabras cargado correctamente.\n")
+
 
 
 
