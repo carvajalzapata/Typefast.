@@ -41,6 +41,31 @@ class Partida:
         return puntaje
 
 
+    def evaluar_nivel(self, precision: float, velocidad: float):
+        if self.nivel_actual.puede_pasar(precision):
+            self.aumentar_nivel()
+        else:
+            print("Repite el nivel con mejor precisión.")
+
+    def aumentar_nivel(self):
+        self.numero_nivel += 1
+        if self.numero_nivel <= 3:
+            print(f"Pasando al nivel {self.numero_nivel}...")
+            self.nivel_actual = Nivel(self.numero_nivel, 50.0, 85.0, self.repositorio)
+            self.nivel_actual.generar_palabra()
+        else:
+            self.finalizar()
+
+    def finalizar(self):
+        print(f"\nPartida finalizada. Puntaje total: {self.puntaje_total}")
+        self.jugador.registrar_resultado(
+            self.puntaje_total,
+            self.nivel_actual.precision_requerida,
+            0,
+            self.numero_nivel
+        )
+        self.en_curso = False
+
 
 
 
