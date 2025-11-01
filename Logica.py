@@ -94,6 +94,26 @@ class Juego:
         partida.iniciar()
         return partida
 
+    def jugar(self):
+        print("=== BIENVENIDO A TYPEFAST ===")
+        nombre = input("Ingrese su nombre: ")
+        partida = self.iniciar_partida(nombre)
+
+        while partida.en_curso:
+            palabra_obj = partida.nivel_actual.obtener_palabra()
+            if not palabra_obj:
+                partida.finalizar()
+                break
+
+            print(f"\nEscriba la palabra: {palabra_obj.texto}")
+            entrada = input("👉 ")
+            precision = partida.registrar_entrada(entrada)
+
+            partida.asignar_puntaje(precision, 50)  # 50 es una velocidad simulada
+            partida.evaluar_nivel(precision, 50)
+
+        self.mostrar_resultados(partida.jugador)
+
 
 
 
