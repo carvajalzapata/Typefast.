@@ -77,6 +77,23 @@ class Juego:
         self.activo = True
         print("Repositorio de palabras cargado correctamente.\n")
 
+    def registrar_jugador(self, nombre: str) -> Jugador:
+        jugador = Jugador(nombre)
+        self.jugadores.append(jugador)
+        print(f"Jugador registrado: {nombre}")
+        return jugador
+
+    def iniciar_partida(self, nombre_jugador: str):
+        jugador = next((j for j in self.jugadores if j.nombre == nombre_jugador), None)
+        if not jugador:
+            jugador = self.registrar_jugador(nombre_jugador)
+
+        partida = Partida(jugador, self.repositorio)
+        self.partidas.append(partida)
+        self.partida_actual = partida
+        partida.iniciar()
+        return partida
+
 
 
 
