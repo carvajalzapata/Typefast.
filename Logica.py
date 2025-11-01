@@ -124,6 +124,10 @@ class Juego:
             print("Partida reiniciada.")
             self.partida_actual.iniciar()
 
+    def salir(self):
+        print("\nCerrando Typefast... ¡Hasta pronto!")
+        self.activo = False
+
 
 
 
