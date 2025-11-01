@@ -28,6 +28,22 @@ class Partida:
         self.nivel_actual.siguiente_palabra()
         return precision
 
+    def calcular_velocidad(self, palabras_correctas: int):
+        self.tiempo_fin = time.time()
+        tiempo_min = (self.tiempo_fin - self.tiempo_inicio) / 60
+        velocidad = palabras_correctas / tiempo_min if tiempo_min > 0 else 0
+        return velocidad
+
+    def asignar_puntaje(self, precision: float, velocidad: float):
+        puntaje = int((precision * velocidad) / 10)
+        self.puntaje_total += puntaje
+        print(f"Puntaje del nivel: {puntaje} | Total: {self.puntaje_total}")
+        return puntaje
+
+
+
+
+
 
 
 
