@@ -1,5 +1,15 @@
 class PalabraJuego:
-    def __init__(self, texto: str, usada: bool = False) -> None:
+    def __init__(self, texto: str):
+        self.texto = texto
+        self.precision = 0.0
+
+    def comparar_con(self, entrada: str) -> float:
+        errores = sum(1 for a, b in zip(self.texto, entrada) if a != b) + abs(len(self.texto) - len(entrada))
+        total = max(len(self.texto), 1)
+        self.precision = ((len(self.texto) - errores) / total) * 100
+        return self.precision
+
+    """def __init__(self, texto: str, usada: bool = False) -> None:
         self.texto: str = texto
         self.precision: float = 0.0
         self.errores: int = 0
@@ -41,10 +51,8 @@ class PalabraJuego:
             return False
 
     def es_correcta(self) -> bool:
-        return self.usada
+        return self.usada"""
 
-    def __str__(self) -> str:
-        return f"Palabra escrita: {self.texto}, Errores: {self.errores}, Precisión: {round(self.precision ,2)}%"
 
 class RepositorioPalabras:
 
@@ -63,13 +71,13 @@ class RepositorioPalabras:
             PalabraJuego("nube"),
             PalabraJuego("auto"),
             PalabraJuego("piso"),
-            PalabraJuego("raton"),
+            PalabraJuego("ratón"),
 
             PalabraJuego("teclado"),
             PalabraJuego("pantalla"),
             PalabraJuego("programa"),
             PalabraJuego("circuito"),
-            PalabraJuego("robotico"),
+            PalabraJuego("robótico"),
             PalabraJuego("sistema"),
             PalabraJuego("ventana"),
             PalabraJuego("botones"),
@@ -78,14 +86,14 @@ class RepositorioPalabras:
 
             PalabraJuego("computadora"),
             PalabraJuego("inteligencia"),
-            PalabraJuego("programacion"),
-            PalabraJuego("parangaricutirimicuaro"),
-            PalabraJuego("electromecanico"),
-            PalabraJuego("transformacion"),
+            PalabraJuego("programación"),
+            PalabraJuego("parangaricutirimícuaro"),
+            PalabraJuego("electromecánico"),
+            PalabraJuego("transformación"),
             PalabraJuego("procesamiento"),
-            PalabraJuego("automatizacion"),
+            PalabraJuego("automatización"),
             PalabraJuego("esternocleidomastoideo"),
-            PalabraJuego("ingenieria"),
+            PalabraJuego("ingeniería"),
 
         ]
 
@@ -104,16 +112,81 @@ class RepositorioPalabras:
         return palabras_nivel[:cantidad]
 
 class Nivel:
-    def __init__(self, numero: int,  repositorio: 'RepositorioPalabras') -> None:
+    def __init__(self, numero: int, repositorio: 'RepositorioPalabras'):
+        self.numero = numero
+        self.repositorio = repositorio
+        self.palabras = []
+        self.indice_actual = 0
+        self.intentos_precision = []
+        self.intentos_velocidad = []
+        self.puntaje_nivel = 0
+
+        # Requisitos mínimos para pasar
+        if numero == 1:
+            self.precision_requerida = 80
+            self.velocidad_requerida = 5
+        elif numero == 2:
+            self.precision_requerida = 90
+            self.velocidad_requerida = 10
+        else:
+            self.precision_requerida = 100
+            self.velocidad_requerida = 15
+
+    def generar_palabras(self):
+        self.palabras = self.repositorio.obtener_por_nivel(self.numero, 5)
+        self.indice_actual = 0
+        self.intentos_precision.clear()
+        self.intentos_velocidad.clear()
+        self.puntaje_nivel = 0
+
+    def obtener_palabra(self):
+        if self.indice_actual < len(self.palabras):
+            return self.palabras[self.indice_actual]
+        return None
+
+    def siguiente_palabra(self):
+        if self.indice_actual < len(self.palabras) - 1:
+            self.indice_actual += 1
+            return True
+        return False
+
+    def registrar_intento(self, precision: float, velocidad: float):
+        self.intentos_precision.append(precision)
+        self.intentos_velocidad.append(velocidad)
+        self.puntaje_nivel += int((precision * velocidad) / 10)  # Puntaje por palabra
+
+    def prom_totales(self):
+        if not self.intentos_precision:
+            return 0, 0
+        prom_p = sum(self.intentos_precision) / len(self.intentos_precision)
+        prom_v = sum(self.intentos_velocidad) / len(self.intentos_velocidad)
+        return prom_p, prom_v
+
+    def puede_pasar(self):
+        prom_p, prom_v = self.prom_totales()
+        return prom_p >= self.precision_requerida and prom_v >= self.velocidad_requerida
+
+    """def __init__(self, numero: int,  repositorio: 'RepositorioPalabras') -> None:
         self.numero: int = numero
         self.repositorio: RepositorioPalabras = repositorio
         self.palabras: list = []
         self.indice_actual: int = 0
         self.tiempo_limite: float = 40.0
 
+        if numero == 1:
+            self.precision_requerida = 80
+            self.velocidad_requerida = 5
+        elif numero == 2:
+            self.precision_requerida = 90
+            self.velocidad_requerida = 10
+        else:
+            self.precision_requerida = 100
+            self.velocidad_requerida = 15
 
     def generar_palabras(self) -> list[str]:
         self.palabras = self.repositorio.obtener_por_nivel(self.numero, 10)
+        self.indice_actual = 0
+
 
         if len(self.palabras) > 0:
             return [p.texto for p in self.palabras]
@@ -131,13 +204,6 @@ class Nivel:
             self.indice_actual += 1
             return self.palabras[self.indice_actual]
 
-    def puede_pasar(self, precision_jugador: float, velocidad_jugador: float) -> bool:
-        return (
-                precision_jugador >= self.precision_requerida and
-                velocidad_jugador >= self.velocidad_requerida
-        )
-
-
     def pasar_nivel(self) -> str|None:
         if self.numero < 4:
             self.numero += 1
@@ -152,7 +218,7 @@ class Nivel:
 
     def reiniciar(self) -> None:
         self.indice_actual = 0
-        print("Nivel reiniciado.")
+        print("Nivel reiniciado.")"""
 
 
 
