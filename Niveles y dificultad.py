@@ -22,7 +22,7 @@ class PalabraJuego:
         self.errores = error
         return error
 
-    def comparar_con(self, entrada: str):
+    def comparar_con(self, entrada: str) ->  float:
         errores = self.calcular_errores(entrada)
         total = len(entrada)
 
@@ -40,7 +40,7 @@ class PalabraJuego:
         else:
             return False
 
-    def es_correcta(self):
+    def es_correcta(self) -> bool:
         return self.usada
 
     def __str__(self) -> str:
@@ -51,21 +51,45 @@ class RepositorioPalabras:
     def __init__(self) -> None:
         self.palabras: list = []
 
-    def cargar_palabras(self):
+    def cargar_palabras(self) -> None:
         self.palabras = [
+            PalabraJuego("sol"),
+            PalabraJuego("luz"),
+            PalabraJuego("mar"),
+            PalabraJuego("casa"),
             PalabraJuego("gato"),
             PalabraJuego("perro"),
-            PalabraJuego("python"),
-            PalabraJuego("computador"),
+            PalabraJuego("flor"),
+            PalabraJuego("nube"),
+            PalabraJuego("auto"),
+            PalabraJuego("piso"),
+            PalabraJuego("raton"),
+
             PalabraJuego("teclado"),
-            PalabraJuego("ratón"),
             PalabraJuego("pantalla"),
+            PalabraJuego("programa"),
+            PalabraJuego("circuito"),
+            PalabraJuego("robotico"),
+            PalabraJuego("sistema"),
+            PalabraJuego("ventana"),
+            PalabraJuego("botones"),
+            PalabraJuego("analisis"),
+            PalabraJuego("modular"),
+
+            PalabraJuego("computadora"),
             PalabraJuego("inteligencia"),
             PalabraJuego("programacion"),
-            PalabraJuego("universidad"),
+            PalabraJuego("parangaricutirimicuaro"),
+            PalabraJuego("electromecanico"),
+            PalabraJuego("transformacion"),
+            PalabraJuego("procesamiento"),
+            PalabraJuego("automatizacion"),
+            PalabraJuego("esternocleidomastoideo"),
+            PalabraJuego("ingenieria"),
+
         ]
 
-    def obtener_por_nivel(self, nivel: int, cantidad:int):
+    def obtener_por_nivel(self, nivel: int, cantidad:int) -> list:
         palabras_nivel = []
 
         for palabra in self.palabras:
@@ -77,66 +101,132 @@ class RepositorioPalabras:
                 palabras_nivel.append(palabra)
             elif nivel == 3 and longitud > 8:
                 palabras_nivel.append(palabra)
+        return palabras_nivel[:cantidad]
 
-        return palabras_nivel
-
-    def __str__(self):
+    def __str__(self) -> str:
         print("Palabras en el repositorio")
         for palabra in self.palabras:
-            print(f"- {palabra.texto}")
+            print(palabra.texto)
 
 
 class Nivel:
-    def __init__(self, numero: int, tiempo_limite: float, precision_requerida:float, repositorio: 'RepositorioPalabras') -> None:
+    def __init__(self, numero: int, precision_requerida:float, velocidad_requerida: float, repositorio: 'RepositorioPalabras') -> None:
         self.numero: int = numero
-        self.tiempo_limite: float = tiempo_limite
         self.precision_requerida: float = precision_requerida
+        self.velocidad_requerida: float = velocidad_requerida
+        self.repositorio: RepositorioPalabras = repositorio
         self.palabras: list = []
         self.indice_actual: int = 0
-        self.repositorio: RepositorioPalabras = repositorio
+        self.tiempo_limite: float = 40.0
+        self.asignar_tiempo_por_nivel()
 
-    def generar_palabra(self, repositorio):
-        self.palabras = repositorio.obtener_por_nivel(self.numero, 5)
+    def asignar_tiempo_por_nivel(self) -> None:
+        self.tiempo_limite = max(10, 40 - (self.numero - 1) * 10)
+
+    def generar_palabras(self) -> list[str]:
+        self.palabras = self.repositorio.obtener_por_nivel(self.numero, 10)
 
         if len(self.palabras) > 0:
-            print("Palabras cargadas para el nivel", self.numero)
-            for palabra in self.palabras:
-                print("-", palabra.texto)
+            return [p.texto for p in self.palabras]
         else:
-            print("No hay palabras disponibles para este nivel.")
+            return ["No hay palabras disponibles para este nivel."]
 
-    def obtener_palabra(self) -> None:
+    def obtener_palabra(self) -> PalabraJuego|None:
         if self.indice_actual < len(self.palabras):
             return self.palabras[self.indice_actual]
         else:
             return None
 
-    def siguiente_palabra(self):
+    def siguiente_palabra(self) -> PalabraJuego|None:
         if self.indice_actual < len(self.palabras) - 1:
-            self.indice_actual = self.indice_actual + 1
+            self.indice_actual += 1
+            return self.palabras[self.indice_actual]
+
+    def calcular_velocidad(self, palabras_correctas: int, tiempo_usado: float) -> float:
+        if tiempo_usado > 0:
+            velocidad = palabras_correctas / tiempo_usado
         else:
-            print("Ya completaste todas las palabras de este nivel.")
+            velocidad = 0
+        print(f"Velocidad del jugador: {velocidad:.2f} palabras/segundo")
+        return velocidad
 
-    def puede_pasar(self, precision_jugador:float):
-        if precision_jugador >= self.precision_requerida:
-            print("¡Nivel superado!")
-            return True
+    def puede_pasar(self, precision_jugador: float, velocidad_jugador: float) -> bool:
+        return (
+                precision_jugador >= self.precision_requerida and
+                velocidad_jugador >= self.velocidad_requerida
+        )
+
+    def reducir_tiempo(self) -> None:
+        tiempo_anterior = self.tiempo_limite
+        self.asignar_tiempo_por_nivel()
+        print(f"Tiempo ajustado de {tiempo_anterior}s a {self.tiempo_limite}s para el nivel {self.numero}.")
+
+    def pasar_nivel(self) -> str|None:
+        if self.numero < 4:
+            self.numero += 1
+            self.precision_requerida = min(1.0, self.precision_requerida + 0.05)
+            self.velocidad_requerida = round(self.velocidad_requerida + 0.05, 2)
+            self.asignar_tiempo_por_nivel()
+            self.indice_actual = 0
+            self.generar_palabras()
         else:
-            print("No alcanzaste la precisión requerida.")
-            return False
+            return "🎉 ¡Completaste todos los niveles!"
 
-    def reducir_tiempo(self, reduccion: int):
-        pass
+    def __str__(self) -> str:
+        return (f"Nivel {self.numero}\n"
+                f"Tiempo límite: {self.tiempo_limite:.0f} s\n"
+                f"Precisión requerida: {self.precision_requerida:.2f}\n"
+                f"Velocidad requerida: {self.velocidad_requerida:.2f} palabras/segundo\n"
+                f"Palabras cargadas: {len(self.palabras)}")
 
-    def pasar_nivel(self):
-        pass
-
-    def mostrar_informacion(self):
-        pass
-
-    def reiniciar(self):
+    def reiniciar(self) -> None:
         self.indice_actual = 0
         print("Nivel reiniciado.")
 
+if __name__ == "__main__":
+    # Crear repositorio y cargar palabras
+    repo = RepositorioPalabras()
+    repo.cargar_palabras()
 
-    
+    # Crear un nivel inicial
+    nivel1 = Nivel(numero=1, precision_requerida=0.8, velocidad_requerida=0.2,
+                   repositorio=repo, cantidad_palabras=10)
+
+    # Generar palabras del nivel
+    print("\n=== PALABRAS DEL NIVEL 1 ===")
+    palabras = nivel1.generar_palabras()
+    for p in palabras:
+        print("-", p)
+
+    # Simular que el jugador escribe la primera palabra
+    palabra_actual = nivel1.obtener_palabra()
+    print("\nPalabra actual:", palabra_actual.texto)
+
+    # Simulamos una entrada con algunos errores
+    entrada_jugador = "gatu"
+    precision = palabra_actual.comparar_con(entrada_jugador)
+    print(f"Entrada del jugador: '{entrada_jugador}' → Precisión: {precision:.2f}")
+
+    # Calcular velocidad (supón 10 palabras correctas en 35 segundos)
+    velocidad = nivel1.calcular_velocidad(palabras_correctas=10, tiempo_usado=35)
+    print(f"Velocidad: {velocidad:.2f} palabras/segundo")
+
+    # Evaluar si puede pasar de nivel
+    pasa = nivel1.puede_pasar(precision_jugador=precision, velocidad_jugador=velocidad)
+    print(f"\n¿Puede pasar de nivel? {'✅ Sí' if pasa else '❌ No'}")
+
+    # Mostrar información del nivel
+    print("\n=== INFORMACIÓN DEL NIVEL ===")
+    print(nivel1)
+
+    # Simular pasar al siguiente nivel
+    if pasa:
+        nivel1.pasar_nivel()
+        print("\n--- Nivel Avanzado ---")
+        print(nivel1)
+        print("\nPalabras del nuevo nivel:")
+        for p in nivel1.generar_palabras():
+            print("-", p)
+
+
+
