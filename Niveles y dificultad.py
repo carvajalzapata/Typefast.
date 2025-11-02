@@ -183,50 +183,7 @@ class Nivel:
         self.indice_actual = 0
         print("Nivel reiniciado.")
 
-if __name__ == "__main__":
-    # Crear repositorio y cargar palabras
-    repo = RepositorioPalabras()
-    repo.cargar_palabras()
 
-    # Crear un nivel inicial
-    nivel1 = Nivel(numero=1, precision_requerida=0.8, velocidad_requerida=0.2,
-                   repositorio=repo, cantidad_palabras=10)
-
-    # Generar palabras del nivel
-    print("\n=== PALABRAS DEL NIVEL 1 ===")
-    palabras = nivel1.generar_palabras()
-    for p in palabras:
-        print("-", p)
-
-    # Simular que el jugador escribe la primera palabra
-    palabra_actual = nivel1.obtener_palabra()
-    print("\nPalabra actual:", palabra_actual.texto)
-
-    # Simulamos una entrada con algunos errores
-    entrada_jugador = "gatu"
-    precision = palabra_actual.comparar_con(entrada_jugador)
-    print(f"Entrada del jugador: '{entrada_jugador}' → Precisión: {precision:.2f}")
-
-    # Calcular velocidad (supón 10 palabras correctas en 35 segundos)
-    velocidad = nivel1.calcular_velocidad(palabras_correctas=10, tiempo_usado=35)
-    print(f"Velocidad: {velocidad:.2f} palabras/segundo")
-
-    # Evaluar si puede pasar de nivel
-    pasa = nivel1.puede_pasar(precision_jugador=precision, velocidad_jugador=velocidad)
-    print(f"\n¿Puede pasar de nivel? {'✅ Sí' if pasa else '❌ No'}")
-
-    # Mostrar información del nivel
-    print("\n=== INFORMACIÓN DEL NIVEL ===")
-    print(nivel1)
-
-    # Simular pasar al siguiente nivel
-    if pasa:
-        nivel1.pasar_nivel()
-        print("\n--- Nivel Avanzado ---")
-        print(nivel1)
-        print("\nPalabras del nuevo nivel:")
-        for p in nivel1.generar_palabras():
-            print("-", p)
 
 
 
