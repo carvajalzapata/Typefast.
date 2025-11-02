@@ -106,13 +106,18 @@ class Juego:
                 break
 
             print(f"\nEscriba la palabra: {palabra_obj.texto}")
+            inicio_palabra = time.time()  # ⏱ Empieza a medir
             entrada = input("👉 ")
+            fin_palabra = time.time()  # ⏱ Termina de medir
+
             precision = partida.registrar_entrada(entrada)
 
-            partida.asignar_puntaje(precision, 50)  # 50 es una velocidad simulada
-            partida.evaluar_nivel(precision, 50)
+            tiempo_total = (fin_palabra - inicio_palabra) / 60
+            palabras_correctas = 1 if precision >= 80 else 0
+            velocidad = palabras_correctas / tiempo_total if tiempo_total > 0 else 0
 
-        self.mostrar_resultados(partida.jugador)
+            partida.asignar_puntaje(precision, velocidad)
+            partida.evaluar_nivel(precision, velocidad)
 
     def mostrar_resultados(self, jugador: Jugador):
         print("\n=== RESULTADOS FINALES ===")
