@@ -28,7 +28,7 @@ class PalabraJuego:
 
         if total > 0:
             aciertos = total - errores
-            self.precision = aciertos / total
+            self.precision = (aciertos / total) * 100
         else:
             self.precision = 0.0
 
@@ -44,7 +44,7 @@ class PalabraJuego:
         return self.usada
 
     def __str__(self) -> str:
-        return f"Palabra escrita: {self.texto}, Errores: {self.errores}, Precisión: {round(self.precision * 100, 2)}%"
+        return f"Palabra escrita: {self.texto}, Errores: {self.errores}, Precisión: {round(self.precision ,2)}%"
 
 class RepositorioPalabras:
 
@@ -182,7 +182,6 @@ class Nivel:
     def reiniciar(self) -> None:
         self.indice_actual = 0
         print("Nivel reiniciado.")
-
 
 
 
