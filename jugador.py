@@ -94,8 +94,17 @@ class Jugador:
         return f"Nivel {nivel}: Sin datos"
 
     def __str__(self):
-        return (f"Jugador: {self.nombre}\n"
+        resumen = (f"Jugador: {self.nombre}\n"
                 f"Puntaje total: {self.puntaje_total}\n"
                 f"Velocidad promedio : {self.velocidad_promedio:.2f}\n"
                 f"Precisión promedio : {self.precision_promedio:.2f}\n"
-                f"Niveles superados: {self.niveles_superados}")
+                f"Niveles superados: {self.niveles_superados}"
+                f"partidas jugadas: {self.partidas_jugadas}")
+
+        if self.promedio_por_nivel:
+            resumen += "\n\n Desempeño por nivel:"
+            for nivel in sorted(self.promedio_por_nivel.keys()):
+                resumen += f"\n{self.obtener_resumen_nivel(nivel)}"
+
+        return resumen
+
