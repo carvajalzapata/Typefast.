@@ -1,3 +1,5 @@
+import random
+
 class PalabraJuego:
     def __init__(self, texto: str):
         self.texto = texto
@@ -85,10 +87,11 @@ class Nivel:
             self.velocidad_requerida = 10
         else:
             self.precision_requerida = 100
-            self.velocidad_requerida = 15
+            self.velocidad_requerida = 150
 
     def generar_palabras(self):
-        self.palabras = self.repositorio.obtener_por_nivel(self.numero, 5)
+        todas = self.repositorio.obtener_por_nivel(self.numero, 999)
+        self.palabras = random.sample(todas, 5)
         self.indice_actual = 0
         self.intentos_precision.clear()
         self.intentos_velocidad.clear()
