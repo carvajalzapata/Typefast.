@@ -9,51 +9,6 @@ class PalabraJuego:
         self.precision = ((len(self.texto) - errores) / total) * 100
         return self.precision
 
-    """def __init__(self, texto: str, usada: bool = False) -> None:
-        self.texto: str = texto
-        self.precision: float = 0.0
-        self.errores: int = 0
-        self.usada: bool = usada
-
-    def calcular_errores(self, entrada: str) -> int:
-        error = 0
-        i = 0
-
-        while i < len(self.texto) and i < len(entrada):
-            if self.texto[i] != entrada[i]:
-                error += 1
-            i = i + 1
-
-        if len(self.texto) > len(entrada):
-            error += (len(self.texto) - len(entrada))
-        elif len(entrada) > len(self.texto):
-            error += (len(entrada) - len(self.texto))
-
-        self.errores = error
-        return error
-
-    def comparar_con(self, entrada: str) ->  float:
-        errores = self.calcular_errores(entrada)
-        total = len(entrada)
-
-        if total > 0:
-            aciertos = total - errores
-            self.precision = (aciertos / total) * 100
-        else:
-            self.precision = 0.0
-
-        return self.precision
-
-    def palabra_correcta(self, palabra_correcta: str) -> bool:
-        if self.texto.lower().strip() == palabra_correcta.lower().strip():
-            return True
-        else:
-            return False
-
-    def es_correcta(self) -> bool:
-        return self.usada"""
-
-
 class RepositorioPalabras:
 
     def __init__(self) -> None:
@@ -112,7 +67,7 @@ class RepositorioPalabras:
         return palabras_nivel[:cantidad]
 
 class Nivel:
-    def __init__(self, numero: int, repositorio: 'RepositorioPalabras'):
+    def __init__(self, numero: int, repositorio: RepositorioPalabras):
         self.numero = numero
         self.repositorio = repositorio
         self.palabras = []
@@ -166,59 +121,6 @@ class Nivel:
         prom_p, prom_v = self.prom_totales()
         return prom_p >= self.precision_requerida and prom_v >= self.velocidad_requerida
 
-    """def __init__(self, numero: int,  repositorio: 'RepositorioPalabras') -> None:
-        self.numero: int = numero
-        self.repositorio: RepositorioPalabras = repositorio
-        self.palabras: list = []
-        self.indice_actual: int = 0
-        self.tiempo_limite: float = 40.0
-
-        if numero == 1:
-            self.precision_requerida = 80
-            self.velocidad_requerida = 5
-        elif numero == 2:
-            self.precision_requerida = 90
-            self.velocidad_requerida = 10
-        else:
-            self.precision_requerida = 100
-            self.velocidad_requerida = 15
-
-    def generar_palabras(self) -> list[str]:
-        self.palabras = self.repositorio.obtener_por_nivel(self.numero, 10)
-        self.indice_actual = 0
-
-
-        if len(self.palabras) > 0:
-            return [p.texto for p in self.palabras]
-        else:
-            return ["No hay palabras disponibles para este nivel."]
-
-    def obtener_palabra(self) -> PalabraJuego|None:
-        if self.indice_actual < len(self.palabras):
-            return self.palabras[self.indice_actual]
-        else:
-            return None
-
-    def siguiente_palabra(self) -> PalabraJuego|None:
-        if self.indice_actual < len(self.palabras) - 1:
-            self.indice_actual += 1
-            return self.palabras[self.indice_actual]
-
-    def pasar_nivel(self) -> str|None:
-        if self.numero < 4:
-            self.numero += 1
-            self.precision_requerida = min(1.0, self.precision_requerida + 0.05)
-            self.velocidad_requerida = round(self.velocidad_requerida + 0.05, 2)
-            self.asignar_tiempo_por_nivel()
-            self.indice_actual = 0
-            self.generar_palabras()
-        else:
-            return "🎉 ¡Completaste todos los niveles!"
-
-
-    def reiniciar(self) -> None:
-        self.indice_actual = 0
-        print("Nivel reiniciado.")"""
 
 
 
