@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15775a9b-8102-44fe-9443-ccdb9ea39085" name="Changes" comment="correcciones finales" />
+    <list default="true" id="f7a2e95f-4a93-4951-b35e-09f4b25755c6" name="Changes" comment="commit todo 7" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +13,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Stub" />
         <option value="Python Script" />
       </list>
     </option>
@@ -21,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Game_Logic" />
+        <entry key="$PROJECT_DIR$" value="Niveles_Dificultad" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,343 +28,178 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;carvajalzapata&quot;
+    &quot;assignee&quot;: &quot;Manuela0613&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/carvajalzapata/Typefast..git&quot;,
-    &quot;accountId&quot;: &quot;8653c857-0917-4406-98df-0121cd2757f7&quot;
+    &quot;accountId&quot;: &quot;3721fd94-cc72-4af0-8883-fbda3f3e4f24&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
+  &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="33fYc4IC7pnjuKdA2gnjUGIUn7h" />
+  <component name="ProjectId" id="33faHx5VVyaYTfGiZNuJZsM34ig" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Logica.executor": "Debug",
-    "Python.codigo final.executor": "Run",
-    "Python.gemini.executor": "Run",
-    "Python.interfaz.executor": "Run",
-    "Python.practica_2.executor": "Run",
-    "Python.pruebas.executor": "Run",
-    "Python.typefast.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/carva"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Niveles y dificultad.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Typefast." />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-fc1d50d2d915-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.24978.54" />
+        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="15775a9b-8102-44fe-9443-ccdb9ea39085" name="Changes" comment="" />
-      <created>1759709669809</created>
+      <changelist id="f7a2e95f-4a93-4951-b35e-09f4b25755c6" name="Changes" comment="" />
+      <created>1750968045122</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1759709669809</updated>
+      <updated>1750968045122</updated>
     </task>
-    <task id="LOCAL-00001" summary="constructor">
+    <task id="LOCAL-00001" summary="commit inicial">
       <option name="closed" value="true" />
-      <created>1759711031873</created>
+      <created>1759712070084</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1759711031873</updated>
+      <updated>1759712070084</updated>
     </task>
-    <task id="LOCAL-00002" summary="constructor">
+    <task id="LOCAL-00002" summary="commit inicial">
       <option name="closed" value="true" />
-      <created>1759711230281</created>
+      <created>1759712932913</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1759711230281</updated>
+      <updated>1759712932913</updated>
     </task>
-    <task id="LOCAL-00003" summary="metodo iniciar partida y verificar palabra">
+    <task id="LOCAL-00003" summary="commit inicial">
       <option name="closed" value="true" />
-      <created>1759711688659</created>
+      <created>1759782353157</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1759711688659</updated>
+      <updated>1759782353157</updated>
     </task>
-    <task id="LOCAL-00004" summary="metodo calcular precision y velocidad">
+    <task id="LOCAL-00004" summary="commit PalabraJuego">
       <option name="closed" value="true" />
-      <created>1759711786688</created>
+      <created>1759782487856</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1759711786688</updated>
+      <updated>1759782487856</updated>
     </task>
-    <task id="LOCAL-00005" summary="metodo asignar puntaje">
+    <task id="LOCAL-00005" summary="commit Repositorio">
       <option name="closed" value="true" />
-      <created>1759711821309</created>
+      <created>1759802418127</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1759711821309</updated>
+      <updated>1759802418127</updated>
     </task>
-    <task id="LOCAL-00006" summary="metodo asignar puntaje">
+    <task id="LOCAL-00006" summary="commit Nivel">
       <option name="closed" value="true" />
-      <created>1759712463922</created>
+      <created>1759804106479</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1759712463922</updated>
+      <updated>1759804106479</updated>
     </task>
-    <task id="LOCAL-00007" summary="codigo de Samuel">
+    <task id="LOCAL-00007" summary="commit todo">
       <option name="closed" value="true" />
-      <created>1759804681497</created>
+      <created>1759804209227</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1759804681497</updated>
+      <updated>1759804209227</updated>
     </task>
-    <task id="LOCAL-00008" summary="codigo de Manuela">
+    <task id="LOCAL-00008" summary="commit todo 2">
       <option name="closed" value="true" />
-      <created>1759804721354</created>
+      <created>1762043053762</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1759804721354</updated>
+      <updated>1762043053762</updated>
     </task>
-    <task id="LOCAL-00009" summary="correcciones">
+    <task id="LOCAL-00009" summary="commit todo 3">
       <option name="closed" value="true" />
-      <created>1759804940822</created>
+      <created>1762043262525</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1759804940822</updated>
+      <updated>1762043262525</updated>
     </task>
-    <task id="LOCAL-00010" summary="metodo calcular presicion y velocidad">
+    <task id="LOCAL-00010" summary="commit todo 4">
       <option name="closed" value="true" />
-      <created>1759805178957</created>
+      <created>1762051980720</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1759805178957</updated>
+      <updated>1762051980720</updated>
     </task>
-    <task id="LOCAL-00011" summary="correccion metodo calcular presicion y velocidad&#10;e implementacion del metodo asignar puntaje">
+    <task id="LOCAL-00011" summary="commit todo 5">
       <option name="closed" value="true" />
-      <created>1759805251937</created>
+      <created>1762058719209</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1759805251937</updated>
+      <updated>1762058719209</updated>
     </task>
-    <task id="LOCAL-00012" summary="metodo avanzar nivel">
+    <task id="LOCAL-00012" summary="commit todo 6">
       <option name="closed" value="true" />
-      <created>1759805528547</created>
+      <created>1762059607678</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1759805528547</updated>
+      <updated>1762059607678</updated>
     </task>
-    <task id="LOCAL-00013" summary="correcciones de mi codigo">
+    <task id="LOCAL-00013" summary="commit todo 7">
       <option name="closed" value="true" />
-      <created>1759806080842</created>
+      <created>1762192234022</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1759806080842</updated>
+      <updated>1762192234022</updated>
     </task>
-    <task id="LOCAL-00014" summary="correcciones de mi codigo">
-      <option name="closed" value="true" />
-      <created>1759807318403</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1759807318403</updated>
-    </task>
-    <task id="LOCAL-00015" summary="nuevo codigo">
-      <option name="closed" value="true" />
-      <created>1759807939437</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1759807939437</updated>
-    </task>
-    <task id="LOCAL-00016" summary="metodo jugar nievl">
-      <option name="closed" value="true" />
-      <created>1759808146406</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1759808146406</updated>
-    </task>
-    <task id="LOCAL-00017" summary="metodo iniciar">
-      <option name="closed" value="true" />
-      <created>1759808346779</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1759808346779</updated>
-    </task>
-    <task id="LOCAL-00018" summary="metodo finalizar">
-      <option name="closed" value="true" />
-      <created>1759808407658</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1759808407658</updated>
-    </task>
-    <task id="LOCAL-00019" summary="codigo para ejecutar">
-      <option name="closed" value="true" />
-      <created>1759808452472</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1759808452472</updated>
-    </task>
-    <task id="LOCAL-00020" summary="codigo para ejecutar">
-      <option name="closed" value="true" />
-      <created>1759809489225</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1759809489225</updated>
-    </task>
-    <task id="LOCAL-00021" summary="codigo para ejecutar">
-      <option name="closed" value="true" />
-      <created>1759809505212</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1759809505212</updated>
-    </task>
-    <task id="LOCAL-00022" summary="clase Partida">
-      <option name="closed" value="true" />
-      <created>1759809622043</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1759809622043</updated>
-    </task>
-    <task id="LOCAL-00023" summary="iniciación clase partida">
-      <option name="closed" value="true" />
-      <created>1762040416873</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040416873</updated>
-    </task>
-    <task id="LOCAL-00024" summary="iniciar y registrar">
-      <option name="closed" value="true" />
-      <created>1762040460946</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040460946</updated>
-    </task>
-    <task id="LOCAL-00025" summary="iniciar y registrar">
-      <option name="closed" value="true" />
-      <created>1762040585966</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040585966</updated>
-    </task>
-    <task id="LOCAL-00026" summary="velocidad y puntaje">
-      <option name="closed" value="true" />
-      <created>1762040647367</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040647367</updated>
-    </task>
-    <task id="LOCAL-00027" summary="metodos de nivel y finalizar">
-      <option name="closed" value="true" />
-      <created>1762040694964</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040694964</updated>
-    </task>
-    <task id="LOCAL-00028" summary="metodos de nivel y finalizar">
-      <option name="closed" value="true" />
-      <created>1762040951534</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1762040951534</updated>
-    </task>
-    <task id="LOCAL-00029" summary="clase juego">
-      <option name="closed" value="true" />
-      <created>1762041016755</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1762041016755</updated>
-    </task>
-    <task id="LOCAL-00030" summary="método registrar e iniciar">
-      <option name="closed" value="true" />
-      <created>1762041063642</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1762041063642</updated>
-    </task>
-    <task id="LOCAL-00031" summary="metodo jugar">
-      <option name="closed" value="true" />
-      <created>1762041152639</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1762041152639</updated>
-    </task>
-    <task id="LOCAL-00032" summary="metodo resultados y reiniciar">
-      <option name="closed" value="true" />
-      <created>1762041214072</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1762041214072</updated>
-    </task>
-    <task id="LOCAL-00033" summary="metodo resultados y reiniciar">
-      <option name="closed" value="true" />
-      <created>1762041224502</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1762041224502</updated>
-    </task>
-    <task id="LOCAL-00034" summary="correcciones">
-      <option name="closed" value="true" />
-      <created>1762042163922</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1762042163922</updated>
-    </task>
-    <task id="LOCAL-00035" summary="correcciones">
-      <option name="closed" value="true" />
-      <created>1762044624191</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1762044624191</updated>
-    </task>
-    <task id="LOCAL-00036" summary="correcciones finales">
-      <option name="closed" value="true" />
-      <created>1762045229124</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1762045229124</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -374,17 +208,12 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="Niveles_Dificultad" />
                       </list>
                     </value>
                   </entry>
@@ -397,31 +226,17 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="metodo calcular precision y velocidad" />
-    <MESSAGE value="metodo asignar puntaje" />
-    <MESSAGE value="codigo de Samuel" />
-    <MESSAGE value="codigo de Manuela" />
-    <MESSAGE value="metodo calcular presicion y velocidad" />
-    <MESSAGE value="correccion metodo calcular presicion y velocidad&#10;e implementacion del metodo asignar puntaje" />
-    <MESSAGE value="metodo avanzar nivel" />
-    <MESSAGE value="correcciones de mi codigo" />
-    <MESSAGE value="nuevo codigo" />
-    <MESSAGE value="metodo jugar nievl" />
-    <MESSAGE value="metodo iniciar" />
-    <MESSAGE value="metodo finalizar" />
-    <MESSAGE value="codigo para ejecutar" />
-    <MESSAGE value="clase Partida" />
-    <MESSAGE value="iniciación clase partida" />
-    <MESSAGE value="import time" />
-    <MESSAGE value="iniciar y registrar" />
-    <MESSAGE value="velocidad y puntaje" />
-    <MESSAGE value="metodos de nivel y finalizar" />
-    <MESSAGE value="clase juego" />
-    <MESSAGE value="método registrar e iniciar" />
-    <MESSAGE value="metodo jugar" />
-    <MESSAGE value="metodo resultados y reiniciar" />
-    <MESSAGE value="correcciones" />
-    <MESSAGE value="correcciones finales" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones finales" />
+    <MESSAGE value="commit inicial" />
+    <MESSAGE value="commit PalabraJuego" />
+    <MESSAGE value="commit Repositorio" />
+    <MESSAGE value="commit Nivel" />
+    <MESSAGE value="commit todo" />
+    <MESSAGE value="commit todo 2" />
+    <MESSAGE value="commit todo 3" />
+    <MESSAGE value="commit todo 4" />
+    <MESSAGE value="commit todo 5" />
+    <MESSAGE value="commit todo 6" />
+    <MESSAGE value="commit todo 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit todo 7" />
   </component>
 </project>
