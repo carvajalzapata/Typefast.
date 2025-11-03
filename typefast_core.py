@@ -1,4 +1,8 @@
 import random
+import tkinter as tk
+from tkinter import messagebox, simpledialog
+from PIL import Image, ImageTk, ImageSequence
+import time
 
 class Jugador:
     def __init__(self, nombre: str):
@@ -228,20 +232,6 @@ def jugar():
     print(f"Puntaje total: {jugador.puntaje_total}")
     print("¡Gracias por jugar TYPEFAST!")
 
-
-import tkinter as tk
-from tkinter import messagebox, simpledialog
-from PIL import Image, ImageTk, ImageSequence
-import time
-
-# =====================================================
-#  INTENTO DE IMPORTAR MÓDULOS PRINCIPALES
-# =====================================================
-try:
-    from typefast_core import Jugador, RepositorioPalabras, Partida
-except ImportError:
-    messagebox.showerror("Error", "No se encontró el archivo 'typefast_core.py'.")
-    exit()
 
 # =====================================================
 #  CLASE PRINCIPAL DE LA INTERFAZ
