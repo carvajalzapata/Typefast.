@@ -1,102 +1,100 @@
 import time
-import tkinter as tk
-from tkinter import messagebox
-from PIL import Image, ImageTk
 
 class Partida:
-    def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras, gui):
+    def __init__(self, jugador: Jugador, repositorio: RepositorioPalabras):
         self.jugador = jugador
         self.repositorio = repositorio
-        self.gui = gui
         self.numero_nivel = 1
-        self.intentos_por_nivel = {1: 3, 2: 3, 3: 3}  # Máximo 3 intentos por nivel
-        self.nivel_actual = Nivel(self.numero_nivel, repositorio)
+        self.nivel_actual = Nivel(self.numero_nivel, self.repositorio)
+        self.en_curso = False
+
+    def iniciar(self):
+        print(f"\n=== Iniciando partida para {self.jugador.nombre} ===")
+        self.en_curso = True
         self.nivel_actual.generar_palabras()
-        self.palabra_inicio = 0
-        self.mostrar_palabra_actual()
 
-    def mostrar_palabra_actual(self):
-        palabra_obj = self.nivel_actual.obtener_palabra()
-        if palabra_obj:
-            self.gui.mostrar_palabra(palabra_obj.texto)
-            self.palabra_inicio = time.time()
-        else:
-            self.completar_nivel()
+    def registrar_entrada(self, entrada: str) -> float:
+        palabra = self.nivel_actual.obtener_palabra()
+        if not palabra:
+            return 0.0
+        precision = palabra.comparar_con(entrada)
+        return precision
 
-    def procesar_entrada(self, entrada):
-        palabra_obj = self.nivel_actual.obtener_palabra()
-        if not palabra_obj:
-            return
-
-        fin = time.time()
-        tiempo = fin - self.palabra_inicio
-        velocidad = (1 / tiempo) * 60 if tiempo > 0 else 0
-        precision = palabra_obj.comparar_con(entrada)
+    def asignar_puntaje(self, precision: float, velocidad: float):
         self.nivel_actual.registrar_intento(precision, velocidad)
+        self.jugador.puntaje_total += int((precision * velocidad) / 10)
 
-        prom_p, prom_v = self.nivel_actual.prom_totales()
-        puntaje_total = self.jugador.puntaje_total + self.nivel_actual.puntaje_nivel
-        self.gui.actualizar_promedios(prom_p, prom_v, puntaje_total)
+    def aumentar_nivel(self):
+        self.numero_nivel += 1
+        if self.numero_nivel > 3:
+            print("\n¡Has completado todos los niveles!")
+            self.en_curso = False
+            return
+        print(f"\n--- Pasando al NIVEL {self.numero_nivel} ---")
+        self.nivel_actual = Nivel(self.numero_nivel, self.repositorio)
+        self.nivel_actual.generar_palabras()
 
-        if self.nivel_actual.siguiente_palabra():
-            self.mostrar_palabra_actual()
-        else:
-            self.completar_nivel()
+    def finalizar(self):
+        print("\n=== FIN DE LA PARTIDA ===")
+        self.en_curso = False
 
-    def completar_nivel(self):
-        self.intentos_por_nivel[self.numero_nivel] -= 1
 
-        prom_p, prom_v = self.nivel_actual.prom_totales()
-        self.jugador.promedios_por_nivel[self.numero_nivel] = (prom_p, prom_v)
-        self.jugador.puntaje_total += self.nivel_actual.puntaje_nivel
-        self.jugador.puntaje_por_nivel[self.numero_nivel] = self.nivel_actual.puntaje_nivel
+def jugar():
+    print("=== BIENVENIDO A TYPEFAST ===")
+    nombre = input("Ingrese su nombre: ")
+    jugador = Jugador(nombre)
+    repo = RepositorioPalabras()
+    repo.cargar_palabras()
+    partida = Partida(jugador, repo)
+    partida.iniciar()
 
-        if self.nivel_actual.puede_pasar():
-            messagebox.showinfo("Nivel completado",
-                                f"¡Superaste el nivel {self.numero_nivel}!\nPuntaje nivel: {self.nivel_actual.puntaje_nivel}")
-            self.numero_nivel += 1
-            if self.numero_nivel <= 3:
-                self.gui.cambiar_fondo(self.numero_nivel)
-                self.nivel_actual = Nivel(self.numero_nivel, self.repositorio)
-                self.nivel_actual.generar_palabras()
-                self.mostrar_palabra_actual()
+    while partida.en_curso:
+        nivel = partida.nivel_actual
+        print(f"\n NIVEL {nivel.numero} | Palabras: {len(nivel.palabras)}")
+        for palabra_obj in nivel.palabras:
+            print(f"\nEscriba la palabra: {palabra_obj.texto}")
+            inicio_palabra = time.time()
+            entrada = input(" Ingrese la palabra: ")
+            fin_palabra = time.time()
+
+            tiempo_segundos = fin_palabra - inicio_palabra
+            tiempo_min = tiempo_segundos / 60
+            velocidad = 1 / tiempo_min if tiempo_min > 0 else 0
+
+            precision = partida.registrar_entrada(entrada)
+            partida.asignar_puntaje(precision, velocidad)
+            print(f" {tiempo_segundos:.2f}s |  {velocidad:.2f} WPM |  {precision:.2f}%")
+
+            nivel.siguiente_palabra()
+
+        prom_p, prom_v = nivel.prom_totales()
+        print("\n=== RESULTADOS DEL NIVEL ===")
+        print(f" Precisión promedio: {prom_p:.2f}%")
+        print(f" Velocidad promedio: {prom_v:.2f} WPM")
+        print(f" Puntaje total acumulado: {jugador.puntaje_total}")
+
+        if nivel.puede_pasar():
+            print("\n Cumples con los requisitos para avanzar al siguiente nivel.")
+            decision = input("¿Deseas pasar al siguiente nivel? (S/N): ").strip().lower()
+            if decision == "s":
+                partida.aumentar_nivel()
             else:
-                self.mostrar_resumen_final()
-                self.gui.root.destroy()
+                print("\nTe has retirado voluntariamente. Fin del juego.")
+                partida.finalizar()
         else:
-            if self.intentos_por_nivel[self.numero_nivel] <= 0:
-                messagebox.showwarning("Juego terminado",
-                                       f" Has agotado los 3 intentos del nivel {self.numero_nivel}. Fin del juego.\nPuntaje nivel: {self.nivel_actual.puntaje_nivel}")
-                self.mostrar_resumen_final()
-                self.gui.root.destroy()
+            print("\n No cumples los requisitos para pasar. Debes repetir el nivel.")
+            repetir = input("¿Deseas intentarlo de nuevo? (S/N): ").strip().lower()
+            if repetir == "s":
+                nivel.generar_palabras()
             else:
-                messagebox.showwarning(
-                    "Intenta otra vez",
-                    f"No alcanzaste el promedio mínimo. Te quedan {self.intentos_por_nivel[self.numero_nivel]} intentos.\nPuntaje nivel: {self.nivel_actual.puntaje_nivel}"
-                )
-                self.nivel_actual.generar_palabras()
-                self.mostrar_palabra_actual()
+                print("\nTe has retirado del juego.")
+                partida.finalizar()
 
-    def mostrar_resumen_final(self):
-        resumen = "Resumen de promedios y puntaje por nivel:\n"
-        for nivel, (p, v) in self.jugador.promedios_por_nivel.items():
-            puntaje = self.jugador.puntaje_por_nivel.get(nivel, 0)
-            resumen += f"Nivel {nivel}: Precisión {p:.1f}% | Velocidad {v:.1f} WPM | Puntaje {puntaje}\n"
-        resumen += f"\n Puntaje Total: {self.jugador.puntaje_total}"
-        messagebox.showinfo("Resumen Final", resumen)
-        self.gui.info_resumen.config(text=resumen)
+    print("\n=== RESULTADOS FINALES ===")
+    print(f"Jugador: {jugador.nombre}")
+    print(f"Puntaje total: {jugador.puntaje_total}")
+    print("¡Gracias por jugar TYPEFAST!")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    jugar()
